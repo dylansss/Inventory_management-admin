@@ -2,7 +2,7 @@
     <div>
         <div style="margin-bottom:15px;display:flex;gap:10px;">
             <el-input v-model="keyword" placeholder="按名称搜索" style="width:200px" />
-            <el-button type="primary" @click="load">搜索</el-button>
+            <base-button @click="load()">查询</base-button>
         </div>
 
         <el-table :data="list" border>
@@ -17,8 +17,9 @@
             </el-table-column>
         </el-table>
 
-        <el-pagination style="margin-top:15px;" :total="total" v-model:current-page="page" :page-size="pageSize"
-            @current-change="load" />
+
+
+        <Pagination ref="paginationRef" :page-total="total" @update="load" />
 
         <el-dialog v-model="visible" :title="type === 'IN' ? '入库' : '出库'">
             <el-form>
@@ -38,7 +39,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import request from '../utils/request'
 import { ElMessage } from 'element-plus'
 
@@ -53,10 +54,18 @@ const currentRow = ref(null)
 const type = ref('IN')
 const quantity = ref(1)
 const remark = ref('')
-
-const load = async () => {
+const paginationRef = ref();
+const load = async (page = 1) => {
+    if (page !== paginationRef.value.pageNum) {
+        paginationRef.value.pageNum = page;
+    }
+    const params = {
+        keyword: keyword.value,
+        page: paginationRef.value.pageNum,
+        pageSize: paginationRef.value.pageSize
+    };
     const res = await request.get('/stock', {
-        params: { page: page.value, pageSize, keyword: keyword.value }
+        params
     })
     list.value = res.data.list
     total.value = res.data.total
@@ -79,16 +88,18 @@ const submit = async () => {
     }
     try {
         console.log(path, params, 'path, params');
-        
+
         await request.post(path, params)
         ElMessage.success('操作成功')
         visible.value = false
         load()
     } catch (error) {
         console.log(error);
-        
+
     }
 }
 
-load()
+onMounted(() => {
+  load()
+})
 </script>
