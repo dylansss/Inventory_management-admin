@@ -17,7 +17,7 @@
           </el-form-item>
 
           <el-form-item label="">
-            <base-button @click="register">注册</base-button>
+            <!-- <base-button @click="register">注册</base-button> -->
             <base-button @click="login">登录</base-button>
           </el-form-item>
         </el-form>
