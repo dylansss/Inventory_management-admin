@@ -8,7 +8,7 @@
         <div class="user-login">
           用户登录<span class="min-title">欢迎使用福庆库存管理系统</span>
         </div>
-        <el-form :model="form" :label-width="90" style="width:300px;margin:150px auto">
+        <el-form :model="form" :label-width="90" style="width:300px;margin:120px auto">
           <el-form-item label="用户名">
             <el-input v-model="form.username" />
           </el-form-item>
@@ -23,6 +23,7 @@
         </el-form>
       </div>
     </div>
+    <FilingFooter class="login-filing-footer" />
   </div>
 </template>
 
@@ -31,6 +32,7 @@ import { reactive } from 'vue'
 import request from '../utils/request'
 import { useUserStore } from '../store/user'
 import { useRouter } from 'vue-router'
+import FilingFooter from '../components/FilingFooter.vue'
 
 const form = reactive({ username: '', password: '' })
 const store = useUserStore()
@@ -70,7 +72,7 @@ $cursor: #fff;
 /* reset element-ui css */
 .login-container {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background: url(../assets/images/login-bigbg.png) 100% 80% no-repeat;
   background-size: cover;
   display: flex;
@@ -122,7 +124,10 @@ $light_gray: #eee;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   position: relative;
+  box-sizing: border-box;
+  padding: 32px 0 72px;
 
   .base-dwo {
     width: 70%;
@@ -205,6 +210,14 @@ $light_gray: #eee;
 
   }
 
+  .login-filing-footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 8px;
+    color: #ffffff;
+    z-index: 2;
+  }
 
 }
 </style>

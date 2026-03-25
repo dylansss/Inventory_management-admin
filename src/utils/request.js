@@ -13,4 +13,20 @@ request.interceptors.request.use(config => {
   return config
 })
 
+request.interceptors.response.use(
+  response => response,
+  error => {
+    if (error.response?.status === 401) {
+      const store = useUserStore()
+      store.logout()
+
+      if (window.location.pathname !== '/login') {
+        window.location.replace('/login')
+      }
+    }
+
+    return Promise.reject(error)
+  }
+)
+
 export default request

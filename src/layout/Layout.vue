@@ -23,6 +23,7 @@
       <el-main>
         <router-view />
       </el-main>
+      <FilingFooter class="layout-filing-footer" />
     </el-container>
   </el-container>
 </template>
@@ -30,6 +31,7 @@
 <script setup>
 import { useUserStore } from '../store/user'
 import { useRouter } from 'vue-router'
+import FilingFooter from '../components/FilingFooter.vue'
 
 const user = useUserStore()
 const router = useRouter()
@@ -83,6 +85,7 @@ const logout = () => {
   .main-container {
     display: flex;
     flex-direction: column;
+    min-width: 0;
 
     .el-header {
       height: 50px;
@@ -101,6 +104,16 @@ const logout = () => {
           margin-left: 10px;
         }
       }
+    }
+
+    .el-main {
+      min-height: 0;
+    }
+
+    .layout-filing-footer {
+      color: #5f6b7a;
+      background: rgba(255, 255, 255, 0.9);
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
     }
   }
 }
