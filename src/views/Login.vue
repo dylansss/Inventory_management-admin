@@ -8,7 +8,7 @@
         <div class="user-login">
           用户登录<span class="min-title">欢迎使用福庆库存管理系统</span>
         </div>
-        <el-form :model="form" :label-width="90" style="width:300px;margin:120px auto">
+        <el-form :model="form" :label-width="90" style="width:300px;margin:100px auto 0">
           <el-form-item label="用户名">
             <el-input v-model="form.username" />
           </el-form-item>
