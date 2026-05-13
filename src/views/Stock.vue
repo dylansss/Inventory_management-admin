@@ -21,7 +21,7 @@
 
         <Pagination ref="paginationRef" :page-total="total" @update="load" />
 
-        <el-dialog v-model="visible" :title="type === 'IN' ? '入库' : '出库'">
+        <el-dialog v-model="visible" :title="type === 'IN' ? '入库' : '出库'" @keydown.enter.native="submit">
             <el-form>
                 <el-form-item label="数量">
                     <el-input-number v-model="quantity" />

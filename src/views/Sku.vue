@@ -24,12 +24,13 @@
 
     <Pagination ref="paginationRef" :page-total="total" @update="load" />
     <!-- 弹窗 -->
-    <el-dialog v-model="visible" :title="form.id ? '编辑商品' : '新增商品'">
+    <el-dialog v-model="visible" :title="form.id ? '编辑商品' : '新增商品'" @keydown.enter.native="submit">
       <el-form :model="form" label-width="80px">
         <el-form-item label="名称"><el-input v-model="form.name" /></el-form-item>
         <el-form-item label="颜色"><el-input v-model="form.color" /></el-form-item>
         <el-form-item label="材质"><el-input v-model="form.material" /></el-form-item>
         <el-form-item label="单位"><el-input v-model="form.unit" /></el-form-item>
+        <el-form-item label="数量"><el-input v-model="form.quantity" /></el-form-item>
         <el-form-item label="备注"><el-input v-model="form.extra" /></el-form-item>
       </el-form>
 
